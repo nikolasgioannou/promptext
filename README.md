@@ -25,11 +25,7 @@ import { text, block, when } from "promptext";
 
 const prompt = block(
   text("Hello {name}!"),
-  when(
-    "isAdmin",
-    text("You have admin access."),
-    text("You are a regular user.")
-  )
+  when("isAdmin", "You have admin access.", "You are a regular user.")
 );
 
 const output = prompt.render({
