@@ -18,6 +18,9 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\"",
     "prepublishOnly": "yarn build"
   },
   "license": "MIT",
@@ -32,7 +35,9 @@
   ],
   "devDependencies": {
     "@types/node": "^25.0.3",
+    "prettier": "^3.7.4",
     "tsup": "^8.5.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.17"
   }
 }

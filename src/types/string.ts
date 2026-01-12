@@ -1,8 +1,8 @@
 export type Trim<S extends string> = S extends ` ${infer R}`
   ? Trim<R>
   : S extends `${infer R} `
-  ? Trim<R>
-  : S;
+    ? Trim<R>
+    : S;
 
 export type ExtractPlaceholders<S extends string> =
   S extends `${string}{${infer P}}${infer R}`

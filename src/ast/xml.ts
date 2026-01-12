@@ -4,8 +4,8 @@ import { compileRenderer } from "../render/renderer";
 
 export interface XmlNode<
   Name extends string = string,
-  C extends readonly Node[] = readonly Node[],
-  Sep extends string = "\n\n"
+  C extends readonly (Node | string)[] = readonly (Node | string)[],
+  Sep extends string = "\n\n",
 > extends Node {
   readonly kind: "xml";
   readonly name: Name;
@@ -16,23 +16,23 @@ export interface XmlNode<
 
 export type Xml<
   Name extends string = string,
-  C extends readonly Node[] = readonly Node[],
-  Sep extends string = "\n\n"
+  C extends readonly (Node | string)[] = readonly (Node | string)[],
+  Sep extends string = "\n\n",
 > = XmlNode<Name, C, Sep> & {
   join<NewSep extends string>(sep: NewSep): Xml<Name, C, NewSep>;
   indent(level?: number): Xml<Name, C, Sep>;
   render(params: ParamsFor<XmlNode<Name, C, Sep>>): string;
 };
 
-export const xml = <Name extends string, C extends readonly Node[]>(
+export const xml = <Name extends string, C extends readonly (Node | string)[]>(
   name: Name,
   ...children: C
 ): Xml<Name, C, "\n\n"> => makeXml(name, children, "\n\n", 0);
 
 const makeXml = <
   Name extends string,
-  C extends readonly Node[],
-  Sep extends string
+  C extends readonly (Node | string)[],
+  Sep extends string,
 >(
   name: Name,
   children: C,

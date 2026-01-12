@@ -51,7 +51,14 @@ export const compileRenderer = (options?: RenderOptions) => {
       case "block": {
         const b = n as BlockNode;
         const out = b.children
-          .map((c) => renderNode(c, params))
+          .map((c) => {
+            // Handle string children as literals (no interpolation)
+            if (typeof c === "string") {
+              return c;
+            }
+            // Handle Node children with full rendering
+            return renderNode(c, params);
+          })
           .join(b.joinWith);
         return applyIndent(out, b.indentLevel);
       }
@@ -59,7 +66,14 @@ export const compileRenderer = (options?: RenderOptions) => {
       case "xml": {
         const x = n as XmlNode;
         const inner = x.children
-          .map((c) => renderNode(c, params))
+          .map((c) => {
+            // Handle string children as literals (no interpolation)
+            if (typeof c === "string") {
+              return c;
+            }
+            // Handle Node children with full rendering
+            return renderNode(c, params);
+          })
           .join(x.joinWith);
 
         const wrapped = `<${x.name}>\n` + inner + `\n</${x.name}>`;
@@ -70,7 +84,13 @@ export const compileRenderer = (options?: RenderOptions) => {
       case "when": {
         const w = n as WhenNode;
         const branch = params[w.key] === true ? w.then : w.else;
-        return branch ? renderNode(branch, params) : "";
+        if (!branch) return "";
+        // Handle string branches as literals (no interpolation)
+        if (typeof branch === "string") {
+          return branch;
+        }
+        // Handle Node branches with full rendering
+        return renderNode(branch, params);
       }
     }
   };
