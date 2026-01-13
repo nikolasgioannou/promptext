@@ -63,7 +63,7 @@ describe("When Conditional Nodes", () => {
     expect(resultShown).toBe("Start\n\nConditional content\n\nEnd");
 
     const resultHidden = node.render({ show: false });
-    expect(resultHidden).toBe("Start\n\n\n\nEnd");
+    expect(resultHidden).toBe("Start\n\nEnd");
   });
 
   it("should handle when with block as then branch", () => {
@@ -96,13 +96,13 @@ describe("When Conditional Nodes", () => {
     expect(resultBoth).toBe("Header\n\nBody\n\nFooter");
 
     const resultNone = node.render({ showHeader: false, showFooter: false });
-    expect(resultNone).toBe("\n\nBody\n\n");
+    expect(resultNone).toBe("Body");
 
     const resultOnlyHeader = node.render({
       showHeader: true,
       showFooter: false,
     });
-    expect(resultOnlyHeader).toBe("Header\n\nBody\n\n");
+    expect(resultOnlyHeader).toBe("Header\n\nBody");
   });
 
   it("should handle boolean false explicitly", () => {

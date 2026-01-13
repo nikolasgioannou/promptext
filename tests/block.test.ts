@@ -179,7 +179,7 @@ describe("Block Nodes", () => {
 
   it("should handle empty string", () => {
     const node = block("", "Content");
-    expect(node.render({})).toBe("\n\nContent");
+    expect(node.render({})).toBe("Content");
   });
 
   it("should handle string with only whitespace", () => {

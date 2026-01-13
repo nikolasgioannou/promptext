@@ -143,6 +143,6 @@ describe("XML Nodes", () => {
 
   it("should handle empty string in xml", () => {
     const node = xml("tag", "", "Content");
-    expect(node.render({})).toBe("<tag>\n\n\nContent\n</tag>");
+    expect(node.render({})).toBe("<tag>\nContent\n</tag>");
   });
 });

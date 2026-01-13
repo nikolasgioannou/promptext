@@ -168,7 +168,7 @@ describe("Integration Tests", () => {
     });
 
     expect(resultWithoutMetadata).toBe(
-      "<document>\n  Title: My Doc\n\n\n\n  Content: Hello\n</document>"
+      "<document>\n  Title: My Doc\n\n  Content: Hello\n</document>"
     );
   });
 
@@ -217,7 +217,7 @@ describe("Integration Tests", () => {
       showWarning: false,
       showFooter: false,
     });
-    expect(resultNone).toBe("\n\nMain content\n\n\n\n");
+    expect(resultNone).toBe("Main content");
   });
 
   it("should handle complex real-world prompt scenario", () => {

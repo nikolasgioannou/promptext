@@ -59,6 +59,7 @@ export const compileRenderer = (options?: RenderOptions) => {
             // Handle Node children with full rendering
             return renderNode(c, params);
           })
+          .filter((s) => s !== "")
           .join(b.joinWith);
         return applyIndent(out, b.indentLevel);
       }
@@ -74,6 +75,7 @@ export const compileRenderer = (options?: RenderOptions) => {
             // Handle Node children with full rendering
             return renderNode(c, params);
           })
+          .filter((s) => s !== "")
           .join(x.joinWith);
 
         const wrapped = `<${x.name}>\n` + inner + `\n</${x.name}>`;
